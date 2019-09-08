@@ -1,0 +1,45 @@
+{
+  "source": {
+    "label": "Ben Nevis",
+    "coords": {
+      "lat": -34.118347,
+      "lng": 150.5209286
+    },
+    "altitudeInMetres" : 1393
+  },
+  "pointsOnCompass": [
+    {
+      "label": "Fort William",
+      "locationType": "TOWN",
+      "coords": {
+        "lat": -34.118347,
+        "lng": 150.5209286
+      },
+      "altitudeInMetres" : 0,
+      "distanceFromSourceInMetres": 6220,
+      "bearingFromSource": 291
+    },
+    {
+      "label": "CARN MOR DEARG",
+      "locationType": "MOUNTAIN",
+      "coords": {
+        "lat": -34.118347,
+        "lng": 150.5209286
+      },
+      "altitudeInMetres" : 1003,
+      "distanceFromSourceInMetres": 6420,
+      "bearingFromSource": 129
+    },
+    {
+      "label": "SGURR A MHAIM",
+      "locationType": "MOUNTAIN",
+      "coords": {
+        "lat": -34.118347,
+        "lng": 150.5209286
+      },
+      "altitudeInMetres" : 993,
+      "distanceFromSourceInMetres": 4490,
+      "bearingFromSource": 188
+    }
+  ]
+}

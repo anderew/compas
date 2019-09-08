@@ -1,0 +1,94 @@
+package org.rendell.maps;
+
+import com.vividsolutions.jts.geom.Geometry;
+import com.vividsolutions.jts.geom.Point;
+import org.h2gis.ext.H2GISExtension;
+import org.h2gis.utilities.SFSUtilities;
+import org.h2gis.utilities.SpatialResultSet;
+import org.rendell.maps.model.Coordinate;
+import org.rendell.maps.model.Location;
+import org.rendell.maps.model.LocationType;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+
+public class HillsDbLocationsDao implements LocationsDao {
+
+    private Connection connection;
+
+
+    public void initialise() {
+        try {
+            Class.forName("org.h2.Driver");
+            // Open memory H2 table
+
+            //DataSource wrappedDataSource = SFSUtilities.wrapSpatialDataSource(originalDataSource);
+            connection = SFSUtilities.wrapConnection(DriverManager.getConnection("jdbc:h2:mem:syntax", "sa", "sa"));
+
+            Statement st = connection.createStatement();
+            // Import spatial functions, domains and drivers
+            // If you are using a file database, you have to do only that once.
+            H2GISExtension.load(connection);
+
+            st.execute("CREATE TABLE POINTS(ID INT PRIMARY KEY,\n" +
+                    "                    name VARCHAR ,\n" +
+                    "                    THE_GEOM GEOMETRY,\n" +
+                    "                    height_in_metres number(4),\n" +
+                    "                    Classification varchar)\n" +
+                    "AS\n" +
+                    "SELECT Number as id, name, ST_MakePoint(Longitude, Latitude) THE_GEOM, Metres, Classification\n" +
+                    "        FROM CSVREAD('classpath:DoBIH_v16_2.csv')");
+
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    @Override
+    public List<Location> findLocations(Coordinate nearTo, long maxDistanceMetres) {
+
+        List<Location> locations = new ArrayList<>();
+
+        double degrees = convertMetresToDegrees(maxDistanceMetres);
+
+        try {
+            // Open memory H2 table
+            Statement st = connection.createStatement();
+            // Import spatial functions, domains and drivers
+            // If you are using a file database, you have to do only that once.
+            H2GISExtension.load(connection);
+
+            try (SpatialResultSet rs = st.executeQuery("SELECT p2.name, p2.the_geom, p2.classification, height_in_metres, ST_GoogleMapLink(p2.the_geom)\n" +
+                    "FROM  points p2\n" +
+                    "WHERE ST_INTERSECTS(ST_BUFFER(ST_MakePoint(" + nearTo.getLongitude() + ", " + nearTo.getLatitude() + "), " + degrees + "), p2.the_geom)" +
+                    "and REGEXP_LIKE(p2.classification, '^(.*,M,)|(^M,).*$|(^.*,M$)', 'c')").unwrap(SpatialResultSet.class)) {
+                while (rs.next()) {
+                    Geometry myGeom = rs.getGeometry("the_geom");
+                    Point point = myGeom.getInteriorPoint();
+                    Coordinate coordinate = new Coordinate(point.getY(), point.getX());
+                    String name = rs.getString("name");
+                    int height = rs.getInt("height_in_metres");
+                    locations.add(new Location(coordinate, name, LocationType.MUNRO, height));
+                }
+
+
+            }
+
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return locations;
+    }
+
+    private double convertMetresToDegrees(long metres) {
+        final double KM_PER_DEGREE = 111;
+        final double M_PER_DEGREE = KM_PER_DEGREE * 1000;
+        return metres / M_PER_DEGREE;
+    }
+}
