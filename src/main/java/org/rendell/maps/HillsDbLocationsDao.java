@@ -2,13 +2,15 @@ package org.rendell.maps;
 
 import com.vividsolutions.jts.geom.Geometry;
 import com.vividsolutions.jts.geom.Point;
-import org.h2gis.ext.H2GISExtension;
+//import org.h2gis.ext.H2GISExtension;
 import org.h2gis.utilities.SFSUtilities;
 import org.h2gis.utilities.SpatialResultSet;
 import org.rendell.maps.model.Coordinate;
 import org.rendell.maps.model.Location;
 import org.rendell.maps.model.LocationType;
+import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -16,11 +18,12 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class HillsDbLocationsDao implements LocationsDao {
 
     private Connection connection;
 
-
+    @PostConstruct
     public void initialise() {
         try {
             Class.forName("org.h2.Driver");
@@ -32,7 +35,9 @@ public class HillsDbLocationsDao implements LocationsDao {
             Statement st = connection.createStatement();
             // Import spatial functions, domains and drivers
             // If you are using a file database, you have to do only that once.
-            H2GISExtension.load(connection);
+            //H2GISExtension.load(connection);
+            st.execute("CREATE ALIAS IF NOT EXISTS H2GIS_SPATIAL FOR \"org.h2gis.functions.factory.H2GISFunctions.load\";\n" +
+                    "CALL H2GIS_SPATIAL();");
 
             st.execute("CREATE TABLE POINTS(ID INT PRIMARY KEY,\n" +
                     "                    name VARCHAR ,\n" +
@@ -61,7 +66,7 @@ public class HillsDbLocationsDao implements LocationsDao {
             Statement st = connection.createStatement();
             // Import spatial functions, domains and drivers
             // If you are using a file database, you have to do only that once.
-            H2GISExtension.load(connection);
+            //H2GISExtension.load(connection);
 
             try (SpatialResultSet rs = st.executeQuery("SELECT p2.name, p2.the_geom, p2.classification, height_in_metres, ST_GoogleMapLink(p2.the_geom)\n" +
                     "FROM  points p2\n" +

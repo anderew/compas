@@ -10,6 +10,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.rendell.maps.model.*;
 
 import java.util.Arrays;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -37,17 +38,17 @@ class CompassGeneratorTest {
                 LocationType.BUILDING,
                 126);
 
-        Location[] targets = {new Location(theAbbey,
+        List<Location> targets = Arrays.asList(new Location(theAbbey,
                 "St Albans Abbey",
                 LocationType.BUILDING,
-                121)};
+                121));
 
 
         Compass actual = compassGenerator.generate(source, targets);
 
         assertEquals(source, actual.getSource());
         assertEquals(1, actual.getPointsOnCompass().size());
-        Location expectedTargetWithBearing = new Location(targets[0], new Vector(237, 772));
+        Location expectedTargetWithBearing = new Location(targets.get(0), new Vector(237, 772));
         assertEquals(expectedTargetWithBearing, actual.getPointsOnCompass().get(0));
 
     }

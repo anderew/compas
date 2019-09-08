@@ -2,12 +2,14 @@ package org.rendell.maps;
 
 import org.rendell.maps.model.Coordinate;
 import org.rendell.maps.model.Vector;
+import org.springframework.stereotype.Component;
 
 import static java.lang.Math.*;
 
 /**
  * Calculations adapted from Javascript on https://www.movable-type.co.uk/scripts/latlong.html
  */
+@Component
 public class BearingCalculator {
 
     public Vector calculate(Coordinate source, Coordinate target) {
