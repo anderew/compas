@@ -8,6 +8,7 @@ public enum LocationType {
     MARYLYN,
     HILL,
     SETTLEMENT,
-    BUILDING
+    BUILDING,
+    CURRENT_LOCATION
 
 }

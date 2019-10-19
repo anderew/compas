@@ -29,9 +29,9 @@ public class CompassService {
         }
         log.info("{} locations found", locations.size());
 
-        Location hack = new Location(nearTo, "centre", LocationType.BUILDING, 0);
+        Location centreOfCompass = new Location(nearTo, "Current Position", LocationType.CURRENT_LOCATION, 0);
 
-        return compassGenerator.generate(hack, locations);
+        return compassGenerator.generate(centreOfCompass, locations);
 
     }
 
