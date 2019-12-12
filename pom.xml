@@ -13,7 +13,7 @@
               issue with the embedded GIS database. Suspect was dependency
               management issue but was unable to find pragmatic solution
               other than not using the starter, including the required dependencies
-              manaually and configuring the maven plugin
+              manually and configuring the maven plugin
     -->
 
     <properties>
