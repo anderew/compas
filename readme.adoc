@@ -1,4 +1,6 @@
- mvn spring-boot:run
+mvn spring-boot:run
+
+curl "http://localhost:9090/compass?latitude=57.068484&longitude=-3.810029" | json_pp
 
 Function which when passed a centre point and target location (by long,latt) can calculate the degrees from magnetic north and distance from source to target.
 
