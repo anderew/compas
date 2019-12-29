@@ -1,4 +1,4 @@
-package org.rendell.maps;
+package org.rendell.maps.dao;
 
 import java.io.File;
 

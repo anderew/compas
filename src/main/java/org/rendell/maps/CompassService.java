@@ -1,6 +1,7 @@
 package org.rendell.maps;
 
 import lombok.extern.slf4j.Slf4j;
+import org.rendell.maps.dao.LocationsDao;
 import org.rendell.maps.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

@@ -1,4 +1,4 @@
-package org.rendell.maps;
+package org.rendell.maps.dao;
 
 import org.rendell.maps.model.Coordinate;
 import org.rendell.maps.model.Location;
