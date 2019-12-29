@@ -18,13 +18,7 @@ Service which will determine whether there is a clear line of site from source t
 
 Component which will query the location database to find points of interest
 
-Functio        <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-simple
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-simple</artifactId>
-            <version>1.7.26</version>
-            <scope>test</scope>
-        </dependency>-->n that takes a central point and a max distance and calulates max and min logn
+Function that takes a central point and a max distance and calulates max and min logn
 
 ****
 Could use a geospatial database to store locations. Would give best mechanisms
@@ -103,3 +97,6 @@ https://wiki.openstreetmap.org/wiki/Map_Features#Historic
 
 2. Write a DAO which loads the CSV from file on initialistion (can switch to zip of web later)
 3. Add a query method which loads the nearby locations
+
+
+http://www.hills-database.co.uk/

@@ -66,19 +66,17 @@ public class HillsDbLocationsDao implements LocationsDao {
 
             try (SpatialResultSet rs = st.executeQuery("SELECT p2.name, p2.the_geom, p2.classification, height_in_metres, ST_GoogleMapLink(p2.the_geom)\n" +
                     "FROM  points p2\n" +
-                    "WHERE ST_INTERSECTS(ST_BUFFER(ST_MakePoint(" + nearTo.getLongitude() + ", " + nearTo.getLatitude() + "), " + degrees + "), p2.the_geom)" +
-                    "and REGEXP_LIKE(p2.classification, '^(.*,M,)|(^M,).*$|(^.*,M$)', 'c')").unwrap(SpatialResultSet.class)) {
+                    "WHERE ST_INTERSECTS(ST_BUFFER(ST_MakePoint(" + nearTo.getLongitude() + ", " + nearTo.getLatitude() + "), " + degrees + "), p2.the_geom)")
+                    .unwrap(SpatialResultSet.class)) {
                 while (rs.next()) {
                     LocationBuilderFromGis builder = new LocationBuilderFromGis();
                     builder.setGeometry(rs.getGeometry("the_geom"))
                         .setName(rs.getString("name"))
-                        .setHeight(rs.getInt("height_in_metres"));
+                        .setHeight(rs.getInt("height_in_metres"))
+                        .setClassification(rs.getString("classification"));
                     locations.add(builder.build());
                 }
-
-
             }
-
 
         } catch (Exception ex) {
             ex.printStackTrace();

@@ -30,10 +30,47 @@ class LocationBuilderFromGisTest {
         LocationBuilderFromGis builder = new LocationBuilderFromGis();
         builder.setGeometry(geometry)
                 .setName("big hill")
+                .setClassification("Ma,M,Sim,CoH,CoU,CoA")
                 .setHeight(1000);
 
         Location actual = builder.build();
         Location expected = new Location(new Coordinate(0, 0), "big hill", LocationType.MUNRO, 1000);
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void buildMarylyn() {
+
+        when(geometry.getInteriorPoint()).thenReturn(point);
+        // Letting the point return zeros as default mock behaviour
+
+        LocationBuilderFromGis builder = new LocationBuilderFromGis();
+        builder.setGeometry(geometry)
+                .setName("smaller hill")
+                .setClassification("Ma,Sim,CoH,CoU,CoA")
+                .setHeight(1000);
+
+        Location actual = builder.build();
+        Location expected = new Location(new Coordinate(0, 0), "smaller hill", LocationType.MARYLYN, 1000);
+
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void buildUnclassfiedLocation() {
+
+        when(geometry.getInteriorPoint()).thenReturn(point);
+        // Letting the point return zeros as default mock behaviour
+
+        LocationBuilderFromGis builder = new LocationBuilderFromGis();
+        builder.setGeometry(geometry)
+                .setName("bump")
+                .setClassification("CoA")
+                .setHeight(1000);
+
+        Location actual = builder.build();
+        Location expected = new Location(new Coordinate(0, 0), "bump", LocationType.UNCLASSFIED, 1000);
 
         assertEquals(expected, actual);
     }

@@ -9,6 +9,8 @@ public enum LocationType {
     HILL,
     SETTLEMENT,
     BUILDING,
-    CURRENT_LOCATION
+    CURRENT_LOCATION,
+    UNCLASSFIED,
+    DONALD;
 
 }
