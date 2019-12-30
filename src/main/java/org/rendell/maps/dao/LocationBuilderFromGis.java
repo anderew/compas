@@ -109,17 +109,29 @@ public class LocationBuilderFromGis {
         if(classifications.contains("M")) {
             return LocationType.MUNRO;
         }
-        if(classifications.contains("C")) {
-            return LocationType.CORBETT;
-        }
-        if(classifications.contains("G")) {
-            return LocationType.GRAHAM;
-        }
-        if(classifications.contains("D")) {
-            return LocationType.DONALD;
-        }
         if(classifications.contains("Ma")) {
             return LocationType.MARYLYN;
+        }
+        if(classifications.contains("Sim")) {
+            return LocationType.OTHER_MOUNTAIN;
+        }
+        if(classifications.contains("5")) {
+            return LocationType.HILL;
+        }
+        if(classifications.contains("4")) {
+            return LocationType.HILL;
+        }
+        if(classifications.contains("3")) {
+            return LocationType.HILL;
+        }
+        if(classifications.contains("2")) {
+            return LocationType.HILL;
+        }
+        if(classifications.contains("1")) {
+            return LocationType.HILL;
+        }
+        if(classifications.contains("0")) {
+            return LocationType.HILL;
         }
 
         return LocationType.UNCLASSFIED;

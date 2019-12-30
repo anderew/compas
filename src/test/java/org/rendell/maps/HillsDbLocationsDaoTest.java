@@ -22,8 +22,8 @@ class HillsDbLocationsDaoTest {
         //Coordinate nearTo = new Coordinate(57.561215, -4.430092);
         //Coordinate nearTo = new Coordinate(56.79685, -5.003508);
         //Coordinate nearTo = new Coordinate(57.696944, -5.048056);
-        //Coordinate nearTo = new Coordinate(51.5076, -0.0994);
-        Coordinate nearTo = new Coordinate(57.068484, -3.810029);
+        Coordinate nearTo = new Coordinate(51.5076, -0.0994);
+        //Coordinate nearTo = new Coordinate(57.068484, -3.810029);
         //Coordinate nearTo = new Coordinate(51.754222, -0.332428);
 
         List<Location> locations = dao.findLocations(nearTo, 10000);

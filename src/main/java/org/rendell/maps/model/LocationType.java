@@ -11,6 +11,7 @@ public enum LocationType {
     BUILDING,
     CURRENT_LOCATION,
     UNCLASSFIED,
-    DONALD;
+    DONALD,
+    OTHER_MOUNTAIN;
 
 }
