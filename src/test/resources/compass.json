@@ -1,45 +1,144 @@
 {
-  "source": {
-    "label": "Ben Nevis",
-    "coords": {
-      "lat": -34.118347,
-      "lng": 150.5209286
-    },
-    "altitudeInMetres" : 1393
-  },
-  "pointsOnCompass": [
+  "pointsOnCompass" : [
     {
-      "label": "Fort William",
-      "locationType": "TOWN",
-      "coords": {
-        "lat": -34.118347,
-        "lng": 150.5209286
+      "altitude" : 153,
+      "fromSource" : {
+        "degrees" : 180.990669284757,
+        "distanceInMetres" : 13681
       },
-      "altitudeInMetres" : 0,
-      "distanceFromSourceInMetres": 6220,
-      "bearingFromSource": 291
+      "locationType" : "UNCLASSFIED",
+      "coordinate" : {
+        "latitude" : 51.631206,
+        "longitude" : -0.335855
+      },
+      "label" : "Bushey Heath (boundary)"
     },
     {
-      "label": "CARN MOR DEARG",
-      "locationType": "MOUNTAIN",
-      "coords": {
-        "lat": -34.118347,
-        "lng": 150.5209286
+      "label" : "Whitehill (Butterfield Green)",
+      "locationType" : "UNCLASSFIED",
+      "coordinate" : {
+        "longitude" : -0.394338,
+        "latitude" : 51.914802
       },
-      "altitudeInMetres" : 1003,
-      "distanceFromSourceInMetres": 6420,
-      "bearingFromSource": 129
+      "altitude" : 178,
+      "fromSource" : {
+        "distanceInMetres" : 18355,
+        "degrees" : 346.624062497354
+      }
     },
     {
-      "label": "SGURR A MHAIM",
-      "locationType": "MOUNTAIN",
-      "coords": {
-        "lat": -34.118347,
-        "lng": 150.5209286
+      "altitude" : 143,
+      "fromSource" : {
+        "degrees" : 151.752225009595,
+        "distanceInMetres" : 13543
       },
-      "altitudeInMetres" : 993,
-      "distanceFromSourceInMetres": 4490,
-      "bearingFromSource": 188
+      "label" : "Arkley",
+      "locationType" : "UNCLASSFIED",
+      "coordinate" : {
+        "longitude" : -0.23953,
+        "latitude" : 51.646895
+      }
+    },
+    {
+      "fromSource" : {
+        "distanceInMetres" : 14927,
+        "degrees" : 154.761219911643
+      },
+      "altitude" : 146,
+      "locationType" : "HILL",
+      "label" : "Highwood Hill",
+      "coordinate" : {
+        "longitude" : -0.240211,
+        "latitude" : 51.63276
+      }
+    },
+    {
+      "altitude" : 119,
+      "fromSource" : {
+        "degrees" : 134.790255543903,
+        "distanceInMetres" : 14290
+      },
+      "coordinate" : {
+        "latitude" : 51.663588,
+        "longitude" : -0.185385
+      },
+      "locationType" : "UNCLASSFIED",
+      "label" : "Bournwell Hill (Hadley Wood)"
+    },
+    {
+      "locationType" : "HILL",
+      "coordinate" : {
+        "longitude" : -0.404076,
+        "latitude" : 51.612379
+      },
+      "label" : "Potter Street Hill",
+      "fromSource" : {
+        "distanceInMetres" : 16528,
+        "degrees" : 197.417598186071
+      },
+      "altitude" : 134
+    },
+    {
+      "altitude" : 147,
+      "fromSource" : {
+        "distanceInMetres" : 12834,
+        "degrees" : 167.82873991158
+      },
+      "coordinate" : {
+        "latitude" : 51.641394,
+        "longitude" : -0.293217
+      },
+      "locationType" : "HILL",
+      "label" : "Deacons Hill"
+    },
+    {
+      "fromSource" : {
+        "distanceInMetres" : 7868,
+        "degrees" : 150.851447578588
+      },
+      "altitude" : 134,
+      "coordinate" : {
+        "longitude" : -0.276829,
+        "latitude" : 51.692411
+      },
+      "locationType" : "HILL",
+      "label" : "Shenley Hill"
+    },
+    {
+      "fromSource" : {
+        "degrees" : 207.682945210711,
+        "distanceInMetres" : 16608
+      },
+      "altitude" : 118,
+      "label" : "Batchworth Heath",
+      "locationType" : "HILL",
+      "coordinate" : {
+        "latitude" : 51.62191,
+        "longitude" : -0.44419
+      }
+    },
+    {
+      "label" : "Bushey Heath",
+      "locationType" : "HILL",
+      "coordinate" : {
+        "latitude" : 51.632184,
+        "longitude" : -0.338232
+      },
+      "fromSource" : {
+        "distanceInMetres" : 13576,
+        "degrees" : 181.690895062828
+      },
+      "altitude" : 154
     }
-  ]
+  ],
+  "source" : {
+    "altitude" : 0,
+    "fromSource" : null,
+    "coordinate" : {
+      "latitude" : 51.754222,
+      "longitude" : -0.332428
+    },
+    "locationType" : "CURRENT_LOCATION",
+    "label" : "Current Position"
+  }
 }
