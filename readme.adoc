@@ -100,3 +100,15 @@ https://wiki.openstreetmap.org/wiki/Map_Features#Historic
 
 
 http://www.hills-database.co.uk/
+
+
+----------
+Docker
+sudo docker build -t springio/gs-spring-boot-docker .
+
+sudo docker run -p 5000:5000 -t springio/gs-spring-boot-docker
+
+sudo docker ps
+sudo docker stop <container ID>
+
+docker run -e "JAVA_TOOL_OPTIONS=-agentlib:jdwp=transport=dt_socket,address=5005,server=y,suspend=n" -p 5000:5000 -p 5005:5005 -t springio/gs-spring-boot-docker
