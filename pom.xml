@@ -114,6 +114,11 @@
 
     <build>
         <plugins>
+            <!-- Pinned: older Maven versions default to compiler plugin 3.1, which ignores maven.compiler.release -->
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.13.0</version>
+            </plugin>
             <plugin>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.2.5</version>
