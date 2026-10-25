@@ -1,8 +1,55 @@
+= Compass
+
+Takes an origin GPS coordinate and a set of points of interest, and works out the
+bearing (degrees from true north) and distance (metres) from the origin to each point.
+
+== Command line (MVP)
+
+Requires Java 17 or later.
+
+----
+mvn package
+java -jar target/compass-1.0-SNAPSHOT.jar \
+    --origin 51.507556,-0.100602 \
+    --poi "Shooters Hill=51.470079,0.069604" \
+    --poi 51.75,-0.33
+----
+
+* `-o`, `--origin LAT,LON` (required): the origin in decimal degrees.
+* `-p`, `--poi [NAME=]LAT,LON` (required, repeatable): a point of interest, optionally named.
+* `-h`, `--help` and `-V`, `--version`.
+
+Output:
+
+----
+{
+  "origin" : { "latitude" : 51.507556, "longitude" : -0.100602 },
+  "points" : [ {
+    "name" : "Shooters Hill",
+    "latitude" : 51.470079,
+    "longitude" : 0.069604,
+    "bearingDegrees" : 109.4,
+    "distanceMetres" : 12500
+  }, {
+    "latitude" : 51.75,
+    "longitude" : -0.33,
+    "bearingDegrees" : 329.7,
+    "distanceMetres" : 31265
+  } ]
+}
+----
+
+Bearings are the initial great-circle bearing, rounded to 0.1 degrees. Distances use the
+haversine formula. Invalid input (a malformed coordinate, latitude outside -90..90 or
+longitude outside -180..180) prints an error with usage and exits with status 2.
+
+== Web service (earlier experiment, not maintained)
+
 mvn spring-boot:run
 
 curl "http://localhost:9090/compass?latitude=57.068484&longitude=-3.810029" | json_pp
 
-Function which when passed a centre point and target location (by long,latt) can calculate the degrees from magnetic north and distance from source to target.
+Function which when passed a centre point and target location (by long,latt) can calculate the degrees from true north and distance from source to target.
 
 Service which takes a list of these locations and iterates over them, producing a compass data structure.
 
