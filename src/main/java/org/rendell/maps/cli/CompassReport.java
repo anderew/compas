@@ -7,13 +7,14 @@ import lombok.Data;
 import java.util.List;
 
 /**
- * JSON output of the CLI: the origin plus the bearing and distance to each point of interest.
+ * JSON output of the CLI: the origin and search radius, plus the bearing and distance to each point found.
  */
 @Data
-@JsonPropertyOrder({"origin", "points"})
+@JsonPropertyOrder({"origin", "radiusMetres", "points"})
 public class CompassReport {
 
     private final Origin origin;
+    private final long radiusMetres;
     private final List<Point> points;
 
     @Data
@@ -25,9 +26,11 @@ public class CompassReport {
 
     @Data
     @JsonInclude(JsonInclude.Include.NON_NULL)
-    @JsonPropertyOrder({"name", "latitude", "longitude", "bearingDegrees", "distanceMetres"})
+    @JsonPropertyOrder({"name", "type", "heightMetres", "latitude", "longitude", "bearingDegrees", "distanceMetres"})
     public static class Point {
         private final String name;
+        private final String type;
+        private final long heightMetres;
         private final double latitude;
         private final double longitude;
         private final double bearingDegrees;
