@@ -1,8 +1,61 @@
+= Compass
+
+Takes an origin GPS coordinate, finds the points of interest (hills) within a radius of it,
+and works out the bearing (degrees from true north) and distance (metres) from the origin to each.
+
+== Command line (MVP)
+
+Requires Java 17 or later.
+
+----
+mvn package
+java -jar target/compass-1.0-SNAPSHOT.jar --origin 57.068484,-3.810029 --radius 5000
+----
+
+* `-o`, `--origin LAT,LON` (required): the origin in decimal degrees.
+* `-r`, `--radius METRES` (optional, default 10000): how far from the origin to search.
+* `-h`, `--help` and `-V`, `--version`.
+
+Points of interest come from the bundled Database of British and Irish Hills
+(`src/main/resources/DoBIH_v16_2.csv`, about 20,000 hills), so an origin outside Britain and
+Ireland finds nothing. Points are listed nearest first:
+
+----
+{
+  "origin" : { "latitude" : 57.068484, "longitude" : -3.810029 },
+  "radiusMetres" : 10000,
+  "points" : [ {
+    "name" : "Sgor Gaoith",
+    "type" : "MUNRO",
+    "heightMetres" : 1118,
+    "latitude" : 57.068561,
+    "longitude" : -3.810856,
+    "bearingDegrees" : 279.7,
+    "distanceMetres" : 51
+  }, {
+    "name" : "Sgoran Dubh Mor",
+    "type" : "OTHER_MOUNTAIN",
+    "heightMetres" : 1111,
+    "latitude" : 57.080415,
+    "longitude" : -3.808167,
+    "bearingDegrees" : 4.8,
+    "distanceMetres" : 1331
+  } ]
+}
+----
+
+Bearings are the initial great-circle bearing, rounded to 0.1 degrees. Distances use the
+haversine formula. Invalid input (a malformed coordinate, latitude outside -90..90, longitude
+outside -180..180, or a radius that is not positive) prints an error with usage and exits with
+status 2. Logging goes to stderr, so stdout is always just the JSON.
+
+== Web service (earlier experiment, not maintained)
+
 mvn spring-boot:run
 
 curl "http://localhost:9090/compass?latitude=57.068484&longitude=-3.810029" | json_pp
 
-Function which when passed a centre point and target location (by long,latt) can calculate the degrees from magnetic north and distance from source to target.
+Function which when passed a centre point and target location (by long,latt) can calculate the degrees from true north and distance from source to target.
 
 Service which takes a list of these locations and iterates over them, producing a compass data structure.
 

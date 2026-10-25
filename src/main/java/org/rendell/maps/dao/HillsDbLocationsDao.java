@@ -2,6 +2,7 @@ package org.rendell.maps.dao;
 
 import org.h2gis.utilities.SFSUtilities;
 import org.h2gis.utilities.SpatialResultSet;
+import org.rendell.maps.BearingCalculator;
 import org.rendell.maps.model.Coordinate;
 import org.rendell.maps.model.Location;
 import org.springframework.stereotype.Component;
@@ -12,19 +13,22 @@ import java.sql.DriverManager;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 public class HillsDbLocationsDao implements LocationsDao {
 
     private Connection connection;
 
+    private final BearingCalculator bearingCalculator = new BearingCalculator();
+
     @PostConstruct
     public void initialise() {
         try {
             Class.forName("org.h2.Driver");
-            // Open memory H2 table
+            // Open a private in-memory H2 database, so each DAO gets its own copy
 
-            connection = SFSUtilities.wrapConnection(DriverManager.getConnection("jdbc:h2:mem:syntax", "sa", "sa"));
+            connection = SFSUtilities.wrapConnection(DriverManager.getConnection("jdbc:h2:mem:", "sa", "sa"));
 
             Statement st = connection.createStatement();
             // Import spatial functions, domains and drivers
@@ -42,7 +46,7 @@ public class HillsDbLocationsDao implements LocationsDao {
 
 
         } catch (Exception ex) {
-            ex.printStackTrace();
+            throw new IllegalStateException("Unable to load hills database", ex);
         }
     }
 
@@ -51,7 +55,7 @@ public class HillsDbLocationsDao implements LocationsDao {
 
         List<Location> locations = new ArrayList<>();
 
-        double degrees = convertMetresToDegrees(maxDistanceMetres);
+        double degrees = convertMetresToDegrees(maxDistanceMetres, nearTo.getLatitude());
 
         try {
             // Open memory H2 table
@@ -72,14 +76,23 @@ public class HillsDbLocationsDao implements LocationsDao {
             }
 
         } catch (Exception ex) {
-            ex.printStackTrace();
+            throw new IllegalStateException("Unable to query hills database", ex);
         }
-        return locations;
+
+        // The buffer is a circle in degrees, so trim the candidates to those truly within range
+        return locations.stream()
+                .filter(location -> bearingCalculator.calculate(nearTo, location.getCoordinate()).getDistanceInMetres() <= maxDistanceMetres)
+                .collect(Collectors.toList());
     }
 
-    private double convertMetresToDegrees(long metres) {
+    /**
+     * Converts to a buffer in degrees large enough to contain the radius in every direction. A degree of
+     * longitude shrinks with latitude, so the buffer is sized for longitude and filtered afterwards.
+     */
+    private double convertMetresToDegrees(long metres, double latitude) {
         final double KM_PER_DEGREE = 111;
         final double M_PER_DEGREE = KM_PER_DEGREE * 1000;
-        return metres / M_PER_DEGREE;
+        double longitudeScale = Math.max(Math.cos(Math.toRadians(latitude)), 0.01);
+        return metres / (M_PER_DEGREE * longitudeScale) * 1.01;
     }
 }
