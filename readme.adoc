@@ -1,4 +1,4 @@
-= Compass
+= Toposcope
 
 Takes an origin GPS coordinate, finds the points of interest (hills) within a radius of it,
 and works out the bearing (degrees from true north) and distance (metres) from the origin to each.
@@ -9,7 +9,7 @@ Requires Java 17 or later.
 
 ----
 mvn package
-java -jar target/compass-1.0-SNAPSHOT.jar --origin 57.068484,-3.810029 --radius 5000
+java -jar target/toposcope-1.0-SNAPSHOT.jar --origin 57.068484,-3.810029 --radius 5000
 ----
 
 * `-o`, `--origin LAT,LON` (required): the origin in decimal degrees.

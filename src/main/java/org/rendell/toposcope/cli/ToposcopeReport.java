@@ -1,4 +1,4 @@
-package org.rendell.maps.cli;
+package org.rendell.toposcope.cli;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -11,7 +11,7 @@ import java.util.List;
  */
 @Data
 @JsonPropertyOrder({"origin", "radiusMetres", "points"})
-public class CompassReport {
+public class ToposcopeReport {
 
     private final Origin origin;
     private final long radiusMetres;

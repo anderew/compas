@@ -1,4 +1,4 @@
-package org.rendell.maps;
+package org.rendell.toposcope;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -7,7 +7,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.rendell.maps.model.*;
+import org.rendell.toposcope.model.*;
 
 import java.util.Arrays;
 import java.util.List;

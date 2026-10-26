@@ -1,8 +1,8 @@
-package org.rendell.maps;
+package org.rendell.toposcope;
 
 import lombok.extern.slf4j.Slf4j;
-import org.rendell.maps.dao.LocationsDao;
-import org.rendell.maps.model.*;
+import org.rendell.toposcope.dao.LocationsDao;
+import org.rendell.toposcope.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

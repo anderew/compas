@@ -1,12 +1,12 @@
-package org.rendell.maps.cli;
+package org.rendell.toposcope.cli;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
-import org.rendell.maps.dao.LocationsDao;
-import org.rendell.maps.model.Coordinate;
-import org.rendell.maps.model.Location;
-import org.rendell.maps.model.LocationType;
+import org.rendell.toposcope.dao.LocationsDao;
+import org.rendell.toposcope.model.Coordinate;
+import org.rendell.toposcope.model.Location;
+import org.rendell.toposcope.model.LocationType;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -17,7 +17,7 @@ import picocli.CommandLine;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class CompassCliTest {
+class ToposcopeCliTest {
 
     private static final Location SHOOTERS_HILL = new Location(new Coordinate(51.470079, 0.069604), "Shooters Hill", LocationType.HILL, 132);
     private static final Location PRIMROSE_HILL = new Location(new Coordinate(51.539722, -0.160833), "Primrose Hill", LocationType.HILL, 63);
@@ -34,7 +34,7 @@ class CompassCliTest {
             searchedRadius = maxDistanceMetres;
             return found;
         };
-        CommandLine commandLine = new CommandLine(new CompassCli(() -> dao));
+        CommandLine commandLine = new CommandLine(new ToposcopeCli(() -> dao));
         commandLine.setOut(new PrintWriter(out));
         commandLine.setErr(new PrintWriter(err));
         return commandLine.execute(args);
@@ -142,8 +142,8 @@ class CompassCliTest {
     @Test
     void bearingJustBelow360ShouldRoundToZero() {
 
-        assertEquals(0.0, CompassCli.roundBearing(359.97));
-        assertEquals(359.9, CompassCli.roundBearing(359.94));
-        assertEquals(109.3, CompassCli.roundBearing(109.26));
+        assertEquals(0.0, ToposcopeCli.roundBearing(359.97));
+        assertEquals(359.9, ToposcopeCli.roundBearing(359.94));
+        assertEquals(109.3, ToposcopeCli.roundBearing(109.26));
     }
 }

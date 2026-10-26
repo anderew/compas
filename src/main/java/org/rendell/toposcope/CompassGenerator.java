@@ -1,8 +1,8 @@
-package org.rendell.maps;
+package org.rendell.toposcope;
 
-import org.rendell.maps.model.Compass;
-import org.rendell.maps.model.Coordinate;
-import org.rendell.maps.model.Location;
+import org.rendell.toposcope.model.Compass;
+import org.rendell.toposcope.model.Coordinate;
+import org.rendell.toposcope.model.Location;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

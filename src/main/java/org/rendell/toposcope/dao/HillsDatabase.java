@@ -1,4 +1,4 @@
-package org.rendell.maps.dao;
+package org.rendell.toposcope.dao;
 
 import java.io.File;
 

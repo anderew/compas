@@ -1,11 +1,11 @@
-package org.rendell.maps;
+package org.rendell.toposcope;
 
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
-import org.rendell.maps.dao.HillsDbLocationsDao;
-import org.rendell.maps.model.Coordinate;
-import org.rendell.maps.model.Location;
-import org.rendell.maps.model.Vector;
+import org.rendell.toposcope.dao.HillsDbLocationsDao;
+import org.rendell.toposcope.model.Coordinate;
+import org.rendell.toposcope.model.Location;
+import org.rendell.toposcope.model.Vector;
 
 import java.util.List;
 

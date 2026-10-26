@@ -1,7 +1,7 @@
-package org.rendell.maps;
+package org.rendell.toposcope;
 
-import org.rendell.maps.model.Coordinate;
-import org.rendell.maps.model.Vector;
+import org.rendell.toposcope.model.Coordinate;
+import org.rendell.toposcope.model.Vector;
 import org.springframework.stereotype.Component;
 
 import static java.lang.Math.*;

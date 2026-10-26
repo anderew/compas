@@ -1,4 +1,4 @@
-package org.rendell.maps.dao;
+package org.rendell.toposcope.dao;
 
 import com.vividsolutions.jts.geom.Geometry;
 import com.vividsolutions.jts.geom.Point;
@@ -6,9 +6,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.rendell.maps.model.Coordinate;
-import org.rendell.maps.model.Location;
-import org.rendell.maps.model.LocationType;
+import org.rendell.toposcope.model.Coordinate;
+import org.rendell.toposcope.model.Location;
+import org.rendell.toposcope.model.LocationType;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
