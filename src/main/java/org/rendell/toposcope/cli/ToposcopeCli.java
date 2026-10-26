@@ -1,13 +1,13 @@
-package org.rendell.maps.cli;
+package org.rendell.toposcope.cli;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import org.rendell.maps.BearingCalculator;
-import org.rendell.maps.dao.HillsDbLocationsDao;
-import org.rendell.maps.dao.LocationsDao;
-import org.rendell.maps.model.Coordinate;
-import org.rendell.maps.model.Location;
-import org.rendell.maps.model.Vector;
+import org.rendell.toposcope.BearingCalculator;
+import org.rendell.toposcope.dao.HillsDbLocationsDao;
+import org.rendell.toposcope.dao.LocationsDao;
+import org.rendell.toposcope.model.Coordinate;
+import org.rendell.toposcope.model.Location;
+import org.rendell.toposcope.model.Vector;
 import picocli.CommandLine;
 import picocli.CommandLine.Command;
 import picocli.CommandLine.Model.CommandSpec;
@@ -21,12 +21,12 @@ import java.util.concurrent.Callable;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
-@Command(name = "compass",
+@Command(name = "toposcope",
         mixinStandardHelpOptions = true,
-        version = "compass 1.0-SNAPSHOT",
+        version = "toposcope 1.0-SNAPSHOT",
         description = "Finds the hills within a radius of an origin and prints, as JSON, the bearing "
                 + "(degrees from true north) and distance (metres) to each, nearest first.")
-public class CompassCli implements Callable<Integer> {
+public class ToposcopeCli implements Callable<Integer> {
 
     static final long DEFAULT_RADIUS_METRES = 10_000;
 
@@ -46,7 +46,7 @@ public class CompassCli implements Callable<Integer> {
 
     private final BearingCalculator bearingCalculator = new BearingCalculator();
 
-    public CompassCli() {
+    public ToposcopeCli() {
         this(() -> {
             HillsDbLocationsDao dao = new HillsDbLocationsDao();
             dao.initialise();
@@ -54,12 +54,12 @@ public class CompassCli implements Callable<Integer> {
         });
     }
 
-    CompassCli(Supplier<LocationsDao> locationsDaoSupplier) {
+    ToposcopeCli(Supplier<LocationsDao> locationsDaoSupplier) {
         this.locationsDaoSupplier = locationsDaoSupplier;
     }
 
     public static void main(String[] args) {
-        System.exit(new CommandLine(new CompassCli()).execute(args));
+        System.exit(new CommandLine(new ToposcopeCli()).execute(args));
     }
 
     @Override
@@ -76,19 +76,19 @@ public class CompassCli implements Callable<Integer> {
         return 0;
     }
 
-    CompassReport buildReport(List<Location> locations) {
-        List<CompassReport.Point> points = locations.stream()
+    ToposcopeReport buildReport(List<Location> locations) {
+        List<ToposcopeReport.Point> points = locations.stream()
                 .map(this::toPoint)
-                .sorted(Comparator.comparingLong(CompassReport.Point::getDistanceMetres))
+                .sorted(Comparator.comparingLong(ToposcopeReport.Point::getDistanceMetres))
                 .collect(Collectors.toList());
 
-        return new CompassReport(new CompassReport.Origin(origin.getLatitude(), origin.getLongitude()), radiusMetres, points);
+        return new ToposcopeReport(new ToposcopeReport.Origin(origin.getLatitude(), origin.getLongitude()), radiusMetres, points);
     }
 
-    private CompassReport.Point toPoint(Location location) {
+    private ToposcopeReport.Point toPoint(Location location) {
         Coordinate target = location.getCoordinate();
         Vector vector = bearingCalculator.calculate(origin, target);
-        return new CompassReport.Point(location.getLabel(),
+        return new ToposcopeReport.Point(location.getLabel(),
                 location.getLocationType() == null ? null : location.getLocationType().name(),
                 location.getAltitude(),
                 target.getLatitude(),

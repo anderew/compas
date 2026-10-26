@@ -1,7 +1,7 @@
-package org.rendell.maps.dao;
+package org.rendell.toposcope.dao;
 
-import org.rendell.maps.model.Coordinate;
-import org.rendell.maps.model.Location;
+import org.rendell.toposcope.model.Coordinate;
+import org.rendell.toposcope.model.Location;
 
 import java.util.List;
 

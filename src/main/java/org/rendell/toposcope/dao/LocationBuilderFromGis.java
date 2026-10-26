@@ -1,11 +1,11 @@
-package org.rendell.maps.dao;
+package org.rendell.toposcope.dao;
 
 import com.vividsolutions.jts.geom.Geometry;
 import com.vividsolutions.jts.geom.Point;
 import lombok.extern.slf4j.Slf4j;
-import org.rendell.maps.model.Coordinate;
-import org.rendell.maps.model.Location;
-import org.rendell.maps.model.LocationType;
+import org.rendell.toposcope.model.Coordinate;
+import org.rendell.toposcope.model.Location;
+import org.rendell.toposcope.model.LocationType;
 
 import java.util.Arrays;
 import java.util.HashSet;

@@ -1,8 +1,8 @@
-package org.rendell.maps;
+package org.rendell.toposcope;
 
 import org.junit.jupiter.api.Test;
-import org.rendell.maps.model.Coordinate;
-import org.rendell.maps.model.Vector;
+import org.rendell.toposcope.model.Coordinate;
+import org.rendell.toposcope.model.Vector;
 
 import static org.junit.jupiter.api.Assertions.*;
 

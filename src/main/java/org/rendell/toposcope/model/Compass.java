@@ -1,4 +1,4 @@
-package org.rendell.maps.model;
+package org.rendell.toposcope.model;
 
 import lombok.Data;
 

@@ -1,10 +1,10 @@
-package org.rendell.maps.dao;
+package org.rendell.toposcope.dao;
 
 import org.h2gis.utilities.SFSUtilities;
 import org.h2gis.utilities.SpatialResultSet;
-import org.rendell.maps.BearingCalculator;
-import org.rendell.maps.model.Coordinate;
-import org.rendell.maps.model.Location;
+import org.rendell.toposcope.BearingCalculator;
+import org.rendell.toposcope.model.Coordinate;
+import org.rendell.toposcope.model.Location;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;

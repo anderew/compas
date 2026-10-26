@@ -1,6 +1,6 @@
-package org.rendell.maps.cli;
+package org.rendell.toposcope.cli;
 
-import org.rendell.maps.model.Coordinate;
+import org.rendell.toposcope.model.Coordinate;
 import picocli.CommandLine.TypeConversionException;
 
 /**
